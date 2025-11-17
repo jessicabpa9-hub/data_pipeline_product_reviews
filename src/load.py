@@ -1,6 +1,8 @@
 import os
 import subprocess
 
+github_url= "https://github.com/jessicabpa9-hub/data_pipeline_product_reviews.git"
+
 def load_data(repo_url):
     git_cmd = "git"
 
@@ -31,4 +33,4 @@ def load_data(repo_url):
 
 if __name__ == "__main__":
     # USER CAN CHANGE THIS:
-    load_data("https://github.com/jessicabpa9-hub/test3.git")
+    load_data(github_url)
