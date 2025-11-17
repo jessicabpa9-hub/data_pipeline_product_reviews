@@ -1,31 +1,34 @@
 import os
 import subprocess
 
-def load_data():
-    file_path = "data/processed/reviews_products.processed.csv"
+def load_data(repo_url):
     git_cmd = "git"
 
-    # Initialize repo if missing
+    # Ensure .git exists
     if not os.path.exists(".git"):
         subprocess.run([git_cmd, "init"])
         subprocess.run([git_cmd, "branch", "-M", "main"])
-        subprocess.run([
-            git_cmd, "remote", "add", "origin",
-            "https://github.com/jessicabpa9-hub/test_pipeline.git"
-        ])
+        subprocess.run([git_cmd, "remote", "add", "origin", repo_url])
+    else:
+        # Always update the remote to the provided repo URL
+        subprocess.run([git_cmd, "remote", "set-url", "origin", repo_url])
 
-    # Add everything so it always matches the repo
+    # Add everything
     subprocess.run([git_cmd, "add", "."])
 
-    subprocess.run([git_cmd, "config", "user.name", "jessicabpa9-hub"])
-    subprocess.run([git_cmd, "config", "user.email", "your-email@example.com"])
+    # Basic Git identity (user can change if needed)
+    subprocess.run([git_cmd, "config", "user.name", "auto-user"])
+    subprocess.run([git_cmd, "config", "user.email", "auto@example.com"])
 
+    # Commit
     subprocess.run([git_cmd, "commit", "--allow-empty", "-m", "Publish processed data"])
 
-    # 🚨 FORCE PUSH — overwrite remote completely
+    # Force push so remote always matches local
     subprocess.run([git_cmd, "push", "-u", "origin", "main", "--force"])
 
-    print("Pushed to: https://github.com/jessicabpa9-hub/test_pipeline.git")
+    print(f"Published updates to GitHub repo: {repo_url}")
+
 
 if __name__ == "__main__":
-    load_data()
+    # USER CAN CHANGE THIS
+    load_data("https://github.com/jessicabpa9-hub/test_pipeline.git")
