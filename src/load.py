@@ -25,7 +25,7 @@ def load_data():
     # 🚨 FORCE PUSH — overwrite remote completely
     subprocess.run([git_cmd, "push", "-u", "origin", "main", "--force"])
 
-    print(f"Published {file_path} to GitHub (force-pushed to main)")
+    print("Pushed to: https://github.com/jessicabpa9-hub/test_pipeline.git")
 
 if __name__ == "__main__":
     load_data()
