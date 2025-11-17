@@ -30,5 +30,5 @@ def load_data(repo_url):
 
 
 if __name__ == "__main__":
-    # USER CAN CHANGE THIS
+    # USER CAN CHANGE THIS:
     load_data("https://github.com/jessicabpa9-hub/test2.git")
